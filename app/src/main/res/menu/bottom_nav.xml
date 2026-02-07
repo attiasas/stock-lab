@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_portfolio" android:icon="@drawable/ic_wallet" android:title="@string/portfolio" />
+    <item android:id="@+id/nav_stocks" android:icon="@drawable/ic_chart" android:title="@string/stocks" />
+    <item android:id="@+id/nav_history" android:icon="@drawable/ic_list" android:title="@string/history" />
+    <item android:id="@+id/nav_analysis" android:icon="@drawable/ic_trending" android:title="@string/analysis" />
+</menu>
