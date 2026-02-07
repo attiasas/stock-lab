@@ -1,6 +1,7 @@
 package com.stocklab.ui.stocks;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.stocklab.R;
+import com.stocklab.model.CompanyOverview;
 import com.stocklab.ui.main.MainActivity;
 
 public class StockDetailFragment extends Fragment {
@@ -80,6 +82,58 @@ public class StockDetailFragment extends Fragment {
         viewModel.getChangeText().observe(getViewLifecycleOwner(), detailChange::setText);
         viewModel.getHeldText().observe(getViewLifecycleOwner(), detailHeld::setText);
 
+        TextView detailSectorIndustry = view.findViewById(R.id.detail_sector_industry);
+        TextView detailMarketCapPe = view.findViewById(R.id.detail_market_cap_pe);
+        TextView detail52w = view.findViewById(R.id.detail_52w);
+        TextView detailDescription = view.findViewById(R.id.detail_description);
+        TextView labelDaily = view.findViewById(R.id.label_daily);
+        TextView detailDailySummary = view.findViewById(R.id.detail_daily_summary);
+
+        viewModel.getOverview().observe(getViewLifecycleOwner(), o -> {
+            if (o == null) {
+                detailSectorIndustry.setVisibility(View.GONE);
+                detailMarketCapPe.setVisibility(View.GONE);
+                detail52w.setVisibility(View.GONE);
+                detailDescription.setVisibility(View.GONE);
+                return;
+            }
+            if (!TextUtils.isEmpty(o.sector) || !TextUtils.isEmpty(o.industry)) {
+                detailSectorIndustry.setText(buildSectorIndustry(o));
+                detailSectorIndustry.setVisibility(View.VISIBLE);
+            } else {
+                detailSectorIndustry.setVisibility(View.GONE);
+            }
+            if (!TextUtils.isEmpty(o.marketCap) || !TextUtils.isEmpty(o.peRatio)) {
+                detailMarketCapPe.setText(buildMarketCapPe(o));
+                detailMarketCapPe.setVisibility(View.VISIBLE);
+            } else {
+                detailMarketCapPe.setVisibility(View.GONE);
+            }
+            if (!TextUtils.isEmpty(o.week52High) || !TextUtils.isEmpty(o.week52Low)) {
+                detail52w.setText("52W: " + o.week52High + " - " + o.week52Low);
+                detail52w.setVisibility(View.VISIBLE);
+            } else {
+                detail52w.setVisibility(View.GONE);
+            }
+            if (!TextUtils.isEmpty(o.description)) {
+                detailDescription.setText(o.description);
+                detailDescription.setVisibility(View.VISIBLE);
+            } else {
+                detailDescription.setVisibility(View.GONE);
+            }
+        });
+
+        viewModel.getDailySummaryText().observe(getViewLifecycleOwner(), text -> {
+            if (text == null || text.isEmpty()) {
+                labelDaily.setVisibility(View.GONE);
+                detailDailySummary.setVisibility(View.GONE);
+            } else {
+                labelDaily.setVisibility(View.VISIBLE);
+                detailDailySummary.setVisibility(View.VISIBLE);
+                detailDailySummary.setText(text);
+            }
+        });
+
         btnBuy.setOnClickListener(v -> doBuy());
         btnSell.setOnClickListener(v -> doSell());
     }
@@ -123,5 +177,25 @@ public class StockDetailFragment extends Fragment {
         } catch (NumberFormatException e) {
             return 0;
         }
+    }
+
+    private static String buildSectorIndustry(CompanyOverview o) {
+        StringBuilder sb = new StringBuilder();
+        if (!TextUtils.isEmpty(o.sector)) sb.append("Sector: ").append(o.sector);
+        if (!TextUtils.isEmpty(o.industry)) {
+            if (sb.length() > 0) sb.append(" | ");
+            sb.append("Industry: ").append(o.industry);
+        }
+        return sb.toString();
+    }
+
+    private static String buildMarketCapPe(CompanyOverview o) {
+        StringBuilder sb = new StringBuilder();
+        if (!TextUtils.isEmpty(o.marketCap)) sb.append("Market cap: ").append(o.marketCap);
+        if (!TextUtils.isEmpty(o.peRatio)) {
+            if (sb.length() > 0) sb.append(" | ");
+            sb.append("P/E: ").append(o.peRatio);
+        }
+        return sb.toString();
     }
 }

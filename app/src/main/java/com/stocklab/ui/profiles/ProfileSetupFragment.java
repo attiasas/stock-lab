@@ -34,6 +34,11 @@ public class ProfileSetupFragment extends Fragment {
         inputCurrency = view.findViewById(R.id.input_currency);
         radioDifficulty = view.findViewById(R.id.radio_difficulty);
 
+        // Default currency to USD (future: add currency exchange)
+        if (inputCurrency.getText() == null || inputCurrency.getText().toString().trim().isEmpty()) {
+            inputCurrency.setText("USD");
+        }
+
         view.findViewById(R.id.btn_create).setOnClickListener(v -> createProfile());
     }
 

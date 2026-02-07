@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                tools:text="USD" />
+                android:text="USD" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView

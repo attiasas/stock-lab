@@ -41,6 +41,72 @@
             android:textSize="14sp"
             tools:text="+2.5%" />
 
+        <!-- Company overview (sector, industry, market cap, 52W) -->
+        <TextView
+            android:id="@+id/detail_sector_industry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="13sp"
+            android:textColor="@color/on_surface_secondary"
+            android:visibility="gone"
+            tools:text="Sector: Technology | Industry: Consumer Electronics"
+            tools:visibility="visible" />
+        <TextView
+            android:id="@+id/detail_market_cap_pe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="13sp"
+            android:textColor="@color/on_surface_secondary"
+            android:visibility="gone"
+            tools:text="Market cap: 2.8T | P/E: 28.5"
+            tools:visibility="visible" />
+        <TextView
+            android:id="@+id/detail_52w"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="13sp"
+            android:textColor="@color/on_surface_secondary"
+            android:visibility="gone"
+            tools:text="52W: $198.23 - $164.08"
+            tools:visibility="visible" />
+        <TextView
+            android:id="@+id/detail_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="12sp"
+            android:textColor="@color/on_surface_secondary"
+            android:maxLines="5"
+            android:ellipsize="end"
+            android:visibility="gone"
+            tools:text="Apple Inc. designs consumer electronics."
+            tools:visibility="visible" />
+
+        <!-- Last 5 days -->
+        <TextView
+            android:id="@+id/label_daily"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Last 5 days"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:visibility="visible" />
+        <TextView
+            android:id="@+id/detail_daily_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="12sp"
+            android:textColor="@color/on_surface_secondary"
+            android:visibility="gone"
+            tools:text="2024-01-15 O:175 H:176 L:174 C:175"
+            tools:visibility="visible" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
