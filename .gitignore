@@ -1,0 +1,42 @@
+# Built application files
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Gradle
+.gradle/
+build/
+**/build/
+
+# Local configuration
+local.properties
+
+# Android Studio
+*.iml
+.idea/
+.DS_Store
+/captures
+.externalNativeBuild
+.cxx
+
+# Keystore and secrets
+*.jks
+*.keystore
+keystore.properties
+
+# Logs and temp
+*.log
+*.tmp
+*.temp
+*.swp
+*~
+
+# Android Profiling
+*.hprof
+
+# NDK
+obj/
+
+# Kotlin (if you add Kotlin later)
+*.class

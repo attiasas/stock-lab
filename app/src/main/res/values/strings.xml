@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StockLab</string>
+    <string name="profiles">Profiles</string>
+    <string name="new_profile">New profile</string>
+    <string name="delete">Delete</string>
+    <string name="play">Play</string>
+    <string name="profile_name">Profile name</string>
+    <string name="starting_capital">Starting capital</string>
+    <string name="currency">Currency</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="easy">Easy</string>
+    <string name="normal">Normal</string>
+    <string name="hard">Hard</string>
+    <string name="create_profile">Create profile</string>
+    <string name="portfolio">Portfolio</string>
+    <string name="stocks">Stocks</string>
+    <string name="history">History</string>
+    <string name="analysis">Analysis</string>
+    <string name="balance">Balance</string>
+    <string name="total_value">Total value</string>
+    <string name="buy">Buy</string>
+    <string name="sell">Sell</string>
+    <string name="quantity">Quantity</string>
+    <string name="price">Price</string>
+    <string name="search_stocks">Search stocks…</string>
+    <string name="transaction_history">Transaction history</string>
+    <string name="simulation_score">Simulation score</string>
+    <string name="performance">Performance</string>
+    <string name="log_out">Log out</string>
+</resources>
