@@ -27,6 +27,7 @@ public class StockDetailViewModel extends ViewModel {
     private final MutableLiveData<String> heldText = new MutableLiveData<>();
     private final MutableLiveData<CompanyOverview> overview = new MutableLiveData<>();
     private final MutableLiveData<String> dailySummaryText = new MutableLiveData<>();
+    private final MutableLiveData<String> error = new MutableLiveData<>();
 
     public void init(Context context, long profileId, String symbol, String name) {
         this.profileId = profileId;
@@ -50,6 +51,7 @@ public class StockDetailViewModel extends ViewModel {
             public void onError(String message) {
                 priceText.setValue("—");
                 changeText.setValue(message);
+                error.postValue(message);
             }
         });
 
@@ -61,6 +63,7 @@ public class StockDetailViewModel extends ViewModel {
             @Override
             public void onError(String message) {
                 overview.setValue(null);
+                error.postValue(message);
             }
         });
 
@@ -82,6 +85,7 @@ public class StockDetailViewModel extends ViewModel {
             @Override
             public void onError(String message) {
                 dailySummaryText.setValue(null);
+                error.postValue(message);
             }
         });
     }
@@ -120,4 +124,5 @@ public class StockDetailViewModel extends ViewModel {
     public MutableLiveData<String> getHeldText() { return heldText; }
     public MutableLiveData<CompanyOverview> getOverview() { return overview; }
     public MutableLiveData<String> getDailySummaryText() { return dailySummaryText; }
+    public MutableLiveData<String> getError() { return error; }
 }

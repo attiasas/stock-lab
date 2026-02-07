@@ -12,8 +12,6 @@ android {
         targetSdk 34
         versionCode 1
         versionName "1.0"
-        def apiKey = project.findProperty("STOCK_API_KEY") ?: "demo"
-        buildConfigField "String", "STOCK_API_KEY", "\"${apiKey}\""
     }
 
     buildTypes {

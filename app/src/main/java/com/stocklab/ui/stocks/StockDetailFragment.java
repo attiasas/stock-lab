@@ -81,6 +81,11 @@ public class StockDetailFragment extends Fragment {
         viewModel.getPriceText().observe(getViewLifecycleOwner(), detailPrice::setText);
         viewModel.getChangeText().observe(getViewLifecycleOwner(), detailChange::setText);
         viewModel.getHeldText().observe(getViewLifecycleOwner(), detailHeld::setText);
+        viewModel.getError().observe(getViewLifecycleOwner(), msg -> {
+            if (msg != null && !msg.isEmpty() && getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).showConnectionError(msg);
+            }
+        });
 
         TextView detailSectorIndustry = view.findViewById(R.id.detail_sector_industry);
         TextView detailMarketCapPe = view.findViewById(R.id.detail_market_cap_pe);

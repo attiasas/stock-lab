@@ -75,7 +75,12 @@ public class StocksFragment extends Fragment {
             if (results != null) adapter.setItems(results);
         });
         viewModel.getError().observe(getViewLifecycleOwner(), msg -> {
-            if (msg != null && !msg.isEmpty()) Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show();
+            if (msg != null && !msg.isEmpty()) {
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show();
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).showConnectionError(msg);
+                }
+            }
         });
 
         viewModel.getTopGainers().observe(getViewLifecycleOwner(), g -> buildMoversList());

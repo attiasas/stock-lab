@@ -21,7 +21,11 @@ import com.stocklab.ui.history.HistoryFragment;
 import com.stocklab.ui.portfolio.PortfolioFragment;
 import com.stocklab.ui.profiles.ProfilesFragment;
 import com.stocklab.ui.profiles.ProfileSetupFragment;
+import com.stocklab.ui.settings.SettingsFragment;
 import com.stocklab.ui.stocks.StocksFragment;
+
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**
  * Single Activity: shows profile list when no profile selected; otherwise main app with bottom nav.
@@ -31,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private ProfileRepository profileRepository;
     private MaterialToolbar toolbar;
     private BottomNavigationView bottomNav;
+    private LinearLayout connectionErrorBanner;
+    private TextView connectionErrorMessage;
     private long currentProfileId = -1;
 
     @Override
@@ -41,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
         profileRepository = new ProfileRepository(this);
         toolbar = findViewById(R.id.toolbar);
         bottomNav = findViewById(R.id.bottom_nav);
+        connectionErrorBanner = findViewById(R.id.connection_error_banner);
+        connectionErrorMessage = findViewById(R.id.connection_error_message);
+        findViewById(R.id.connection_error_dismiss).setOnClickListener(v -> showConnectionError(false));
 
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
         bottomNav.setOnItemSelectedListener(item -> {
@@ -138,11 +147,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean onToolbarMenuItemClick(MenuItem item) {
+        if (item.getItemId() == R.id.action_settings) {
+            toolbar.setTitle(R.string.settings);
+            toolbar.setNavigationIcon(android.R.drawable.ic_menu_revert);
+            loadFragmentWithBackStack(new SettingsFragment());
+            return true;
+        }
         if (item.getItemId() == R.id.action_logout) {
             logOut();
             return true;
         }
         return false;
+    }
+
+    /** Show or hide the connection error banner. When shown, user can dismiss it. */
+    public void showConnectionError(boolean show) {
+        if (connectionErrorBanner != null) {
+            connectionErrorBanner.setVisibility(show ? View.VISIBLE : View.GONE);
+        }
+    }
+
+    /** Show connection error banner with optional message (default from strings). */
+    public void showConnectionError(String message) {
+        if (connectionErrorMessage != null) {
+            connectionErrorMessage.setText(message != null && !message.isEmpty() ? message : getString(R.string.connection_error_message));
+        }
+        showConnectionError(true);
     }
 
     public void loadFragment(Fragment fragment) {
