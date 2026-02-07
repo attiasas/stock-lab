@@ -34,7 +34,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/api_key_help"
             android:textSize="13sp"
-            android:textColor="?attr/colorOnSurfaceVariant" />
+            android:textColor="@color/on_surface_secondary" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_save_api_key"

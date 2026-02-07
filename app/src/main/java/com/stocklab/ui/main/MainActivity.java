@@ -85,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
                 if (currentProfileId <= 0) {
                     toolbar.setTitle(R.string.profiles);
                     toolbar.getMenu().clear();
+                    toolbar.inflateMenu(R.menu.menu_profiles);
+                    toolbar.setOnMenuItemClickListener(MainActivity.this::onToolbarMenuItemClick);
                     toolbar.setNavigationIcon(null);
                 } else {
                     toolbar.setTitle(R.string.app_name);
@@ -96,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
     private void showProfileList() {
         toolbar.setTitle(R.string.profiles);
         toolbar.setNavigationIcon(null);
+        toolbar.getMenu().clear();
+        toolbar.inflateMenu(R.menu.menu_profiles);
+        toolbar.setOnMenuItemClickListener(this::onToolbarMenuItemClick);
         bottomNav.setVisibility(View.GONE);
         loadFragment(new ProfilesFragment());
     }

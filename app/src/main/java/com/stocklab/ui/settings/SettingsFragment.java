@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputEditText;
 import com.stocklab.R;
 import com.stocklab.StockLabApp;
+import com.stocklab.data.local.AppPreferences;
 import com.stocklab.data.remote.StockApiClient;
 
 public class SettingsFragment extends Fragment {
@@ -30,9 +31,10 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         inputApiKey = view.findViewById(R.id.input_api_key);
-        String current = ((StockLabApp) requireContext().getApplicationContext()).getAppPreferences().getApiKey();
-        if (current != null) {
-            inputApiKey.setText(current);
+        AppPreferences prefs = StockLabApp.getInstance().getAppPreferences();
+        if (prefs != null) {
+            String current = prefs.getApiKey();
+            if (current != null) inputApiKey.setText(current);
         }
 
         view.findViewById(R.id.btn_save_api_key).setOnClickListener(v -> saveApiKey());
@@ -48,7 +50,8 @@ public class SettingsFragment extends Fragment {
 
     private void saveApiKey() {
         String key = inputApiKey.getText() != null ? inputApiKey.getText().toString().trim() : "";
-        ((StockLabApp) requireContext().getApplicationContext()).getAppPreferences().setApiKey(key.isEmpty() ? null : key);
+        AppPreferences prefs = StockLabApp.getInstance().getAppPreferences();
+        if (prefs != null) prefs.setApiKey(key.isEmpty() ? null : key);
         StockApiClient.setApiKey(key.isEmpty() ? "demo" : key);
         Toast.makeText(requireContext(), R.string.api_key_saved, Toast.LENGTH_SHORT).show();
     }
